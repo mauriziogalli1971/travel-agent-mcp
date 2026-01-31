@@ -1,13 +1,11 @@
 import { withRetries } from './serviceHelpers';
 import { FetchClient } from '../http/fetchClient';
-import { NotFoundError } from 'openai';
-import { RemoteApiError } from '../../domain/errors';
+import { NotFoundError, RemoteApiError } from '../../domain/errors';
 
 export class WeatherService {
 	constructor({ api_key, timeoutMs, logger } = {}) {
 		this.baseUrl = 'https://api.openweathermap.org/data/3.0/onecall';
 		this.api_key = api_key || '';
-		this.apiMethod = 'GET';
 		this.timeoutMs = timeoutMs || 20000;
 		this.logger = logger;
 	}
@@ -20,6 +18,7 @@ export class WeatherService {
 		const url = new URL(this.baseUrl);
 		url.searchParams.set('lat', lat);
 		url.searchParams.set('lon', lon);
+		url.searchParams.set('appid', this.api_key);
 
 		const headers = { accept: 'application/json' };
 
