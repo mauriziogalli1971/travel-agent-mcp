@@ -24,3 +24,7 @@ export function parseSSEResponse(sseText) {
 	// Return whatever we found, or empty array
 	return jsonData?.result?.tools || [];
 }
+
+export function isDev(url) {
+	return url.hostname === 'localhost' || url.hostname.includes('127.0.0.1');
+}

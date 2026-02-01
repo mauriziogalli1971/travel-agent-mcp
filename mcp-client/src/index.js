@@ -5,7 +5,7 @@ import { toolService } from './infra/ai/toolService';
 import { planTrip } from './app/planTrip';
 import { TripData } from './domain/types';
 import { mapErrorToHttp } from './http/errorMapping';
-import { parseSSEResponse } from './utils/helpers'
+import { isDev, parseSSEResponse } from './utils/helpers'
 
 const headers = {
 	'Access-Control-Allow-Origin': '*',
@@ -13,6 +13,7 @@ const headers = {
 	'Access-Control-Allow-Headers': 'Content-Type',
 	'Content-Type': 'application/json',
 };
+
 
 export default {
 	async fetch(request, env) {
@@ -28,8 +29,19 @@ export default {
 			try {
 				logger.logInfo?.('request.debug.tools');
 
+				const mcpFetcher =
+					isDev(url)
+						? null
+						: env['mcp-server'];
+
+				const initUrl =
+					isDev(url)
+						? 'http://localhost:8788/mcp'
+						: 'https://mcp-server/mcp';
+
 				// Step 1: Initialize the MCP session
-				const initRequest = new Request('http://localhost:8788/mcp', {
+				// Define the URL to the MCP endpoint: use service binding if production, else local dev URL in .env file
+				const initRequest = new Request(config.MCP_SERVER_URL, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -50,7 +62,7 @@ export default {
 					}),
 				});
 
-				const initResponse = await fetch(initRequest);
+				const initResponse = mcpFetcher ? await mcpFetcher.fetch(initRequest) : await fetch(initRequest);
 
 				if (!initResponse.ok) {
 					const errorText = await initResponse.text();
@@ -64,7 +76,7 @@ export default {
 				const sessionId = initResponse.headers.get('mcp-session-id');
 
 				// Step 2: Now call tools/list with the session
-				const toolsRequest = new Request('http://localhost:8788/mcp', {
+				const toolsRequest = new Request(config.MCP_SERVER_URL, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
@@ -78,7 +90,7 @@ export default {
 					}),
 				});
 
-				const mcpResponse = await fetch(toolsRequest);
+				const mcpResponse = mcpFetcher ? await mcpFetcher.fetch(toolsRequest) : await fetch(toolsRequest);
 
 				// Clone the response before reading the body
 				const responseText = await mcpResponse.text();

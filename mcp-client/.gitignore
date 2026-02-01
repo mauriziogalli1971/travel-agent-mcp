@@ -165,7 +165,6 @@ dist
 .env*
 !.env.example
 .wrangler/
-wrangler.jsonc
 
 # Editor directories and files
 .vscode/*
