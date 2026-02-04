@@ -1,0 +1,31 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "mcp-client",
+	"main": "src/index.js",
+	"compatibility_date": "2025-09-06",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
+	"dev": {
+		"port": 8787
+	},
+	"env": {
+		"local": {
+			"vars": {
+				"CLOUDFLARE_INCLUDE_PROCESS_ENV": true
+			}
+		},
+		"production" : {
+			"services": [
+				{
+					"binding": "mcp-server",
+					"service": "mcp-server"
+				}
+			]
+		}
+	}
+}
