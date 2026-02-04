@@ -187,7 +187,7 @@ export default function Settings() {
     try {
       const workerUrl = import.meta.env.DEV
         ? 'http://localhost:8787/debug/tools'
-        : 'https://mcp-client.mauriziogalli1971.workers.dev/debug/tools';
+        : 'https://mcp-client-production.mauriziogalli1971.workers.dev/debug/tools';
 
       const response = await fetch(workerUrl, {
         method: 'POST',

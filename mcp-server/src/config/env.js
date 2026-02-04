@@ -18,7 +18,7 @@ export class Config {
 	 * @param env {Object} - The environment variables in Cloudflare Workers.
 	 */
 	constructor(env) {
-		const { OPENAI_API_KEY, SUPABASE_URL, SUPABASE_API_KEY, OPENWEATHER_API_KEY, SERPAPI_API_KEY, MCP_SERVER_URL } = env;
+		const { OPENAI_API_KEY, SUPABASE_URL, SUPABASE_API_KEY, OPENWEATHER_API_KEY, SERPAPI_API_KEY } = env;
 
 		this.OPENAI_API_KEY = OPENAI_API_KEY;
 		this.SUPABASE_URL = SUPABASE_URL;

@@ -22,8 +22,8 @@
 		"production" : {
 			"services": [
 				{
-					"binding": "mcp-server",
-					"service": "mcp-server"
+					"binding": "MCP_SERVER",
+					"service": "mcp-server-production"
 				}
 			]
 		}

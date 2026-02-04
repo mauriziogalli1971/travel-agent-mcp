@@ -32,7 +32,7 @@ export default {
 				const mcpFetcher =
 					isDev(url)
 						? null
-						: env['mcp-server'];
+						: env.MCP_SERVER;
 
 				// Step 1: Initialize the MCP session
 				// Define the URL to the MCP endpoint: use service binding if production, else local dev URL in .env file
