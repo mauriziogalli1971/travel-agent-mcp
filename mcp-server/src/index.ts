@@ -136,7 +136,7 @@ export class MyMCP extends McpAgent {
 export default {
     fetch(request: Request, env: Env, ctx: ExecutionContext) {
         const url = new URL(request.url);
-
+        logger.logInfo('mcp server incoming request', request.url, { meta: { url }});
         if (url.pathname.startsWith("/mcp")) {
                 return MyMCP.serve("/mcp").fetch(request, env, ctx);
         }

@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"mcp-server-dev": "wrangler dev",
-		"mcp-server-deploy": "wrangler deploy",
+		"mcp-server-deploy": "wrangler deploy --env=production",
 		"format": "biome format --write",
 		"lint:fix": "biome lint --fix",
 		"cf-typegen": "wrangler types",

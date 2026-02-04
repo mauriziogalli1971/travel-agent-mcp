@@ -3,8 +3,8 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"mcp-client-dev": "wrangler dev",
-		"mcp-client-deploy": "wrangler deploy",
+		"mcp-client-dev": "wrangler dev --env local",
+		"mcp-client-deploy": "wrangler deploy --env=production",
 		"mcp-client-test": "vitest"
 	},
 	"devDependencies": {

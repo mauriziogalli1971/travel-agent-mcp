@@ -34,11 +34,6 @@ export default {
 						? null
 						: env['mcp-server'];
 
-				const initUrl =
-					isDev(url)
-						? 'http://localhost:8788/mcp'
-						: 'https://mcp-server/mcp';
-
 				// Step 1: Initialize the MCP session
 				// Define the URL to the MCP endpoint: use service binding if production, else local dev URL in .env file
 				const initRequest = new Request(config.MCP_SERVER_URL, {
