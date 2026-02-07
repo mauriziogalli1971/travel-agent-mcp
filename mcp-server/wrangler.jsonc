@@ -20,6 +20,14 @@
     "local": {
       "vars": {
         "CLOUDFLARE_INCLUDE_PROCESS_ENV": true
+      },
+      "durable_objects": {
+        "bindings": [
+          {
+            "class_name": "MyMCP",
+            "name": "MCP_OBJECT"
+          }
+        ]
       }
     },
     "production" : {

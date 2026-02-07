@@ -1,5 +1,6 @@
 import { withRetries } from "./serviceHelpers";
 import { FetchClient } from "../infra/http/fetchClient";
+import { stringify } from 'node:querystring'
 
 export class FlightsService {
   constructor({ hl, currency, api_key, timeoutMs, logger } = {}) {
@@ -24,6 +25,7 @@ export class FlightsService {
     url.searchParams.set("api_key", this.api_key);
     url.searchParams.set("hl", this.hl);
     url.searchParams.set("currency", this.currency);
+    url.searchParams.set("deep_search", true);
     url.searchParams.set("departure_id", fromIata);
     url.searchParams.set("arrival_id", toIata);
     url.searchParams.set("outbound_date", start);

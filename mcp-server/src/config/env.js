@@ -29,10 +29,10 @@ export class Config {
 
 	static fromEnv(env) {
 		const { OPENAI_API_KEY, SUPABASE_URL, SUPABASE_API_KEY, OPENWEATHER_API_KEY, SERPAPI_API_KEY } = env;
-		if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY is required');
+
+    if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY is required');
 		if (!SUPABASE_URL) throw new Error('SUPABASE_URL is required');
 		if (!SUPABASE_API_KEY) throw new Error('SUPABASE_API_KEY is required');
-
 		if (!OPENWEATHER_API_KEY) throw new Error('OPENWEATHER_API_KEY is required');
 		if (!SERPAPI_API_KEY) throw new Error('SERPAPI_API_KEY is required');
 

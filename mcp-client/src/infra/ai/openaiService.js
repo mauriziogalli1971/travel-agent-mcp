@@ -2,14 +2,16 @@ import { OpenAI } from 'openai';
 
 export class OpenAIService {
 	constructor(apiKey, config) {
+		const defaults = {
+			model: 'gpt-5',
+			baseURL: 'https://api.openai.com/v1',
+		}
+		this.config = { ...defaults, ...config };
+
 		this.openai = new OpenAI({
 			apiKey,
-			baseURL: 'https://gateway.ai.cloudflare.com/v1/4892e0000e9e2f5967571b3c44400136/travel-agent-gateway/openai',
+			baseURL: this.config.baseURL,
 		});
-		this.config = config || {
-			model: 'gpt-5',
-			// temperature: 0.8,
-		};
 	}
 
 	get() {

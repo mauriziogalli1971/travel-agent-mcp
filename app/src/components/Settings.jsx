@@ -186,8 +186,8 @@ export default function Settings() {
     loader.current.classList.add('loading');
     try {
       const workerUrl = import.meta.env.DEV
-        ? 'http://localhost:8787/debug/tools'
-        : 'https://mcp-client-production.mauriziogalli1971.workers.dev/debug/tools';
+        ? 'http://localhost:8787'
+        : 'https://mcp-client-production.mauriziogalli1971.workers.dev';
 
       const response = await fetch(workerUrl, {
         method: 'POST',
