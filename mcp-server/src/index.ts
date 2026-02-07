@@ -4,7 +4,7 @@ import {z} from "zod";
 import {CoordinatesService} from "./services/coordinatesService";
 import {Logger} from "./infra/logging/logger";
 import {SupabaseAirportsRepo} from "./repos/supabaseAirportsRepo";
-import {Config} from "./config/env";
+import {Config} from "./infra/config/env";
 import {WeatherService} from "./services/weatherService";
 import {FlightsService} from "./services/flightsService";
 import {HotelsService} from "./services/hotelsService";
