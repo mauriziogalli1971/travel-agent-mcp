@@ -81,7 +81,7 @@ Concrete restructuring (files/modules)
 
 - http/
     - handler.js (fetch adapter, CORS, error mapping)
-    - validators.js (request schema)
+    - validators.ts (request schema)
 - app/
     - planTrip.js (orchestrator calling 3 agents in parallel)
     - agents/
@@ -89,12 +89,12 @@ Concrete restructuring (files/modules)
         - flightsAgent.js
         - hotelsAgent.js
 - domain/
-    - types.js (TripRequest, TripResult, WeatherSummary, FlightOption, HotelOption)
-    - errors.js
+    - types.ts (TripRequest, TripResult, WeatherSummary, FlightOption, HotelOption)
+    - errors.ts
     - presenters.js (final one-liners formatting)
 - infra/
     - ai/
-        - openaiService.js (chat, tool-runner)
+        - openaiService.ts (chat, tool-runner)
         - toolRunner.js (loop)
     - http/
         - fetchClient.js (with timeouts, retries, logging)
@@ -106,10 +106,10 @@ Concrete restructuring (files/modules)
         - flightsService.js
         - hotelsService.js
     - logging/
-        - logger.js
+        - logger.ts
     - config/
-        - env.js (read/validate env, expose config object)
-- index.js
+        - env.ts (read/validate env, expose config object)
+- index.ts
     - Only wires dependencies and exports fetch.
 
 Behavioral improvements
