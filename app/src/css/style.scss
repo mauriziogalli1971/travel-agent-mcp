@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 $unit: 1rem;
 $max-width: 430px;
@@ -32,7 +32,7 @@ $space-lg: 3 * $space;
 :root {
   background-color: $color-2;
   color: $color-1;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   font-style: normal;
@@ -61,8 +61,12 @@ body {
   margin: 0;
 }
 
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   text-align: center;
 }
@@ -133,9 +137,8 @@ $input-line-height: 1;
 $input-border-width: calc(2 * $unit / 5);
 $input-bg-color: $color-3;
 $input-color: $color-1;
-$spinner-width: $input-height - 2*$space;
+$spinner-width: $input-height - 2 * $space;
 .form {
-
   .loader {
     align-items: center;
     background-color: color.adjust($color-1, $alpha: -0.1);
@@ -150,7 +153,7 @@ $spinner-width: $input-height - 2*$space;
     position: absolute;
 
     &::after {
-      content: "Planning your trip...";
+      content: 'Planning your trip...';
     }
 
     //noinspection CssUnusedSymbol

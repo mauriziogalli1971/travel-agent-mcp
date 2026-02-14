@@ -1,7 +1,7 @@
 :root {
   background-color: rgba(255, 255, 255, 0.87);
   color: #242424;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   font-style: normal;
@@ -29,7 +29,12 @@ body {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   text-align: center;
 }
@@ -89,7 +94,7 @@ h3 {
 .form .loader {
   align-items: center;
   background-color: rgba(36, 36, 36, 0.9);
-  background-image: url("../img/loader.svg");
+  background-image: url('../img/loader.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80%;
@@ -100,7 +105,7 @@ h3 {
   position: absolute;
 }
 .form .loader::after {
-  content: "Planning your trip...";
+  content: 'Planning your trip...';
 }
 .form .loader.loading {
   display: flex;
@@ -131,7 +136,8 @@ h3 {
   margin: auto;
   min-width: 4rem;
 }
-.form-control input:focus, .form-control input:focus-visible {
+.form-control input:focus,
+.form-control input:focus-visible {
   border-radius: 6rem;
   height: 5.2rem;
   outline: 0.4rem solid -webkit-focus-ring-color;

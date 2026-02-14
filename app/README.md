@@ -73,11 +73,11 @@ npm run preview
     - weatherAgent: gets coordinates then weather and returns a one-sentence forecast.
     - flightsAgent: finds nearby airports and searches flights, returns a one-sentence suggestion.
     - hotelsAgent: fetches available hotels and returns a single-sentence recommendation.
-- src/js/utils.js
+- src/js/utils.ts
     - getWeatherData, getCoordinates, getFlightsData, getNearbyAirports, getHotelsData utilities (fetch wrappers).
 - src/components, src/css, src/img
     - UI components, styles, and assets.
-- App.jsx / main.jsx
+- App.tsx / main.tsx
     - App bootstrap and routing.
 
 ## How It Works
@@ -112,7 +112,7 @@ Note: Vite exposes environment variables prefixed with VITE_ to the client code.
 ## Customization
 
 - Adjust system prompts and rules in src/js/agents.js to change agent behaviors.
-- Extend utils.js to add/replace data sources.
+- Extend utils.ts to add/replace data sources.
 - Modify the UI (components and styles) to match your brand.
 
 ## Troubleshooting
