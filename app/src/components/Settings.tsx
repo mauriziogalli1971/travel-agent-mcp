@@ -216,6 +216,7 @@ export default function Settings(): JSX.Element {
     });
 
     const tripData = await response.json();
+
     if (!tripData) {
       throw new Error(
         'No trip data returned from the worker. Please check the logs for more details.',

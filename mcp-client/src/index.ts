@@ -9,6 +9,7 @@ import { RemoteApiError } from "./domain/errors";
 
 import type { ConfigOptions } from "./infra/config/env";
 import type { TripResponse } from "./domain/types";
+import { isLocalDev } from "./utils/helpers";
 
 const headers = {
 	"Access-Control-Allow-Origin": "*",
@@ -32,9 +33,11 @@ export default {
 		const url = new URL(request.url);
 
 		try {
-			logger.logInfo?.("MCP Server incoming request", request.url, {
+			logger.logInfo("MCP Server incoming request", request.url, {
 				meta: { url },
 			});
+
+			const mcpFetcher = isLocalDev(url) ? null : env.MCP_SERVER;
 
 			// Step 1: Initialize the MCP session
 			// Define the URL to the MCP endpoint: use service binding if production, else local dev URL in .env file
@@ -51,7 +54,7 @@ export default {
 						protocolVersion: "2024-11-05",
 						capabilities: {},
 						clientInfo: {
-							name: "travel-agent-worker",
+							name: "mcp-client",
 							version: "1.0.0",
 						},
 					},
@@ -59,7 +62,9 @@ export default {
 				}),
 			});
 
-			const initResponse = await fetch(initRequest);
+			const initResponse = mcpFetcher
+				? await mcpFetcher.fetch(initRequest)
+				: await fetch(initRequest);
 
 			if (!initResponse.ok) {
 				const errorText = await initResponse.text();
@@ -74,7 +79,7 @@ export default {
 
 			// Step 2: Now call the MCP tool endpoint
 			try {
-				let tripResponse: TripResponse = await request.json();
+				const tripResponse: TripResponse = await request.json();
 
 				try {
 					let tripData: TripData = TripData.create(tripResponse);

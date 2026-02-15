@@ -21,6 +21,12 @@
         	"options": {
             	"printWidth": 150
         	}
-     	}
+     	},
+		{
+			"files": ["**/*.jsonc"],
+			"options": {
+				"trailingComma": "none"
+			}
+		}
 	]
 }

@@ -1,4 +1,4 @@
-import { DomainError } from "../domain/errors";
+import type { DomainError } from "../domain/errors";
 
 export function mapErrorToHttp(error: DomainError) {
 	const code = error?.code;
