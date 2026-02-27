@@ -1,6 +1,6 @@
 import { withRetries } from "./serviceHelpers";
 import { FetchClient } from "../infra/http/fetchClient";
-import {Logger, NotFoundError, RemoteApiError} from "@travel-agent/shared";
+import { Logger, NotFoundError, RemoteApiError } from "@travel-agent/shared";
 
 interface WeatherServiceOptions {
   api_key?: string;
@@ -12,13 +12,20 @@ export class WeatherService {
   private readonly api_key: string;
   private readonly timeoutMs: number;
 
-  constructor({ api_key, timeoutMs }:WeatherServiceOptions = {} as WeatherServiceOptions) {
+  constructor(
+    { api_key, timeoutMs }: WeatherServiceOptions = {} as WeatherServiceOptions,
+  ) {
     this.baseUrl = "https://api.openweathermap.org/data/3.0/onecall";
     this.api_key = api_key || "";
     this.timeoutMs = timeoutMs || 20000;
   }
 
-  async get({ lat, lon }: { lat: number; lon: number } = {} as { lat: number; lon: number }) {
+  async get(
+    { lat, lon }: { lat: number; lon: number } = {} as {
+      lat: number;
+      lon: number;
+    },
+  ) {
     const step = "WeatherService.get";
 
     if (!(lat && lon)) throw new Error("Invalid parameters");
@@ -36,7 +43,7 @@ export class WeatherService {
         const json = await reqHandler.handle(this.timeoutMs);
 
         if (!json) {
-          throw new RemoteApiError('Fetching weather data failed');
+          throw new RemoteApiError("Fetching weather data failed");
         }
 
         return json;

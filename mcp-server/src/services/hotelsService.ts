@@ -1,6 +1,12 @@
-import {withRetries} from "./serviceHelpers";
-import {FetchClient} from "../infra/http/fetchClient";
-import {Logger, NotFoundError, RemoteApiError, TripData, ValidationError} from "@travel-agent/shared";
+import { withRetries } from "./serviceHelpers";
+import { FetchClient } from "../infra/http/fetchClient";
+import {
+  Logger,
+  NotFoundError,
+  RemoteApiError,
+  TripData,
+  ValidationError,
+} from "@travel-agent/shared";
 
 interface HotelsServiceOptions {
   hl?: string;
@@ -24,7 +30,14 @@ export class HotelsService {
   private readonly engine: string;
   private readonly timeoutMs: number;
 
-  constructor({ hl, currency, api_key, timeoutMs }: HotelsServiceOptions = {} as HotelsServiceOptions) {
+  constructor(
+    {
+      hl,
+      currency,
+      api_key,
+      timeoutMs,
+    }: HotelsServiceOptions = {} as HotelsServiceOptions,
+  ) {
     if (!api_key) throw new Error("api_key is required");
     this.hl = hl || "en";
     this.currency = currency || "EUR";
@@ -62,7 +75,7 @@ export class HotelsService {
         const json = await reqHandler.handle(this.timeoutMs);
 
         if (!json) {
-          throw new RemoteApiError('Fetching hotels data failed');
+          throw new RemoteApiError("Fetching hotels data failed");
         }
 
         return json;
@@ -70,7 +83,7 @@ export class HotelsService {
 
       const { ads } = hotelsData;
       if (!Array.isArray(ads) || ads.length === 0) {
-        throw new NotFoundError('No hotels data found');
+        throw new NotFoundError("No hotels data found");
       }
 
       return hotelsData;
