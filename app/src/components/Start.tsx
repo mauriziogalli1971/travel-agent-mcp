@@ -2,9 +2,7 @@
 import logo from '/logo.png';
 import type { JSX } from 'react';
 
-type StartProps = {
-  setIntro: (intro: boolean) => void;
-};
+type StartProps = { setIntro: (intro: boolean) => void };
 
 export function Start({ setIntro }: StartProps): JSX.Element {
   return (

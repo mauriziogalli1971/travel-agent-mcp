@@ -1,31 +1,13 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "mcp-client",
-	"main": "src/index.ts",
-	"compatibility_date": "2025-09-06",
-	"compatibility_flags": ["nodejs_compat"],
-	"observability": {
-		"enabled": true,
-		"logs": {
-			"enabled": true
-		}
-	},
-	"dev": {
-		"port": 8787
-	},
-	"env": {
-		"local": {
-			"vars": {
-				"CLOUDFLARE_INCLUDE_PROCESS_ENV": true
-			}
-		},
-		"production": {
-			"services": [
-				{
-					"binding": "MCP_SERVER",
-					"service": "mcp-server-production"
-				}
-			]
-		}
-	}
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mcp-client",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-09-06",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true, "logs": { "enabled": true } },
+  "dev": { "port": 8787 },
+  "env": {
+    "local": { "vars": { "CLOUDFLARE_INCLUDE_PROCESS_ENV": true } },
+    "production": { "services": [{ "binding": "MCP_SERVER", "service": "mcp-server-production" }] }
+  }
 }

@@ -51,10 +51,7 @@ export default function Settings(): JSX.Element {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const userLocation = {
-        lat: 0,
-        lon: 0,
-      };
+      const userLocation = { lat: 0, lon: 0 };
       userLocation.lat = position.coords.latitude;
       userLocation.lon = position.coords.longitude;
       getLocationName(userLocation)
@@ -209,9 +206,7 @@ export default function Settings(): JSX.Element {
 
     const response = await fetch(workerUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ from, to, travellers, start, end, budget }),
     });
 

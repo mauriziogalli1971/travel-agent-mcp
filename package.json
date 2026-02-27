@@ -1,0 +1,11 @@
+{
+  "name": "travel-agent-mcp",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "npm@10",
+  "workspaces": [
+    "mcp-client",
+    "mcp-server",
+    "packages"
+  ]
+}

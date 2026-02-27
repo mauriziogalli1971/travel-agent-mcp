@@ -97,14 +97,14 @@ Concrete restructuring (files/modules)
         - openaiService.ts (chat, tool-runner)
         - toolRunner.js (loop)
     - http/
-        - fetchClient.js (with timeouts, retries, logging)
+        - fetchClient.ts (with timeouts, retries, logging)
     - repos/
-        - supabaseAirportsRepo.js
+        - supabaseAirportsRepo.ts
     - services/
-        - coordinatesService.js
-        - weatherService.js
-        - flightsService.js
-        - hotelsService.js
+        - coordinatesService.ts
+        - weatherService.ts
+        - flightsService.ts
+        - hotelsService.ts
     - logging/
         - logger.ts
     - config/

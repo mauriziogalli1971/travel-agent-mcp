@@ -1,47 +1,47 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "mcp-server",
-  "main": "src/index.ts",
-  "compatibility_date": "2025-03-10",
-  "compatibility_flags": ["nodejs_compat"],
-  "migrations": [
-    {
-      "new_sqlite_classes": ["MyMCP"],
-      "tag": "v1"
-    }
-  ],
-  "observability": {
-    "enabled": true,
-    "logs": {
-      "enabled": true
-    }
-  },
-  "dev": {
-    "port": 8788
-  },
-  "env": {
-    "local": {
-      "vars": {
-        "CLOUDFLARE_INCLUDE_PROCESS_ENV": true
-      },
-      "durable_objects": {
-        "bindings": [
-          {
-            "class_name": "MyMCP",
-            "name": "MCP_OBJECT"
-          }
-        ]
-      }
-    },
-    "production" : {
-      "durable_objects": {
-        "bindings": [
-          {
-            "class_name": "MyMCP",
-            "name": "MCP_OBJECT"
-          }
-        ]
-      }
-    }
-  }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "mcp-server",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-03-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"migrations": [
+		{
+			"new_sqlite_classes": ["MyMCP"],
+			"tag": "v1"
+		}
+	],
+	"observability": {
+		"enabled": true,
+		"logs": {
+			"enabled": true
+		}
+	},
+	"dev": {
+		"port": 8788
+	},
+	"env": {
+		"local": {
+			"vars": {
+				"CLOUDFLARE_INCLUDE_PROCESS_ENV": true
+			},
+			"durable_objects": {
+				"bindings": [
+					{
+						"class_name": "MyMCP",
+						"name": "MCP_OBJECT"
+					}
+				]
+			}
+		},
+		"production": {
+			"durable_objects": {
+				"bindings": [
+					{
+						"class_name": "MyMCP",
+						"name": "MCP_OBJECT"
+					}
+				]
+			}
+		}
+	}
 }

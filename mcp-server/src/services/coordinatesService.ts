@@ -1,37 +1,27 @@
 import { FetchClient } from "../infra/http/fetchClient";
 import { withRetries } from "./serviceHelpers";
-import { isValidCoords } from "../utils/validators";
+import { isValidCoords, Logger } from "@travel-agent/shared";
 import {
   NotFoundError,
   RemoteApiError,
   ValidationError,
-} from "../domain/errors";
+} from "@travel-agent/shared";
 
 export class CoordinatesService {
-  /**
-   * @param {{ logger?: any, baseUrl?: string }} deps
-   */
-  constructor({ logger } = {}) {
-    this.logger = logger;
-    this.baseUrl = "https://nominatim.openstreetmap.org/search";
-  }
+  constructor() {}
 
-  /**
-   * Resolve coordinates from a place name.
-   * @param {string} place
-   * @returns {Promise<{ lat:number, lon:number }>}
-   */
-  async get(place) {
+  async get(place: string): Promise<{ lat: number; lon: number }> {
     const step = "CoordinatesService.get";
-    const q = this.#normalizePlace(place);
+    const paramPlace = String(place ?? "").trim();
+    const baseUrl = "https://nominatim.openstreetmap.org/search";
 
     // Basic validation
-    if (!q) {
+    if (!paramPlace) {
       throw new ValidationError("Place is required");
     }
 
-    const url = new URL(this.baseUrl);
-    url.searchParams.set("q", q);
+    const url = new URL(baseUrl);
+    url.searchParams.set("q", paramPlace);
     url.searchParams.set("limit", "1");
     url.searchParams.set("format", "json");
 
@@ -50,7 +40,7 @@ export class CoordinatesService {
         if (!json) {
           throw new RemoteApiError(
             "CoordinatesService - fetching coordinates failed.",
-            `No data returned for place: ${q}`,
+            { fields: [`No data returned for place: ${paramPlace}`] },
           );
         }
 
@@ -63,26 +53,17 @@ export class CoordinatesService {
         lon: parseFloat(first.lon),
       };
       if (!isValidCoords(coordinates.lat, coordinates.lon)) {
-        throw new NotFoundError("No coordinates found", { place });
+        throw new NotFoundError("No coordinates found", { fields: [place] });
       }
 
-      this.logger?.logInfo?.(
-        step,
-        `CoordinatesService - resolved coordinate for place: ${place}`,
-        coordinates,
-      );
-
       return coordinates;
-    } catch (err) {
-      this.logger?.logError?.(step, err.message, {
-        code: err.code,
-        status: err.status,
+    } catch (e: Error | any) {
+      const logger = new Logger();
+      logger.logError(step, e.message, {
+        code: e.code,
+        status: e.status,
       });
-      throw err;
+      throw e;
     }
-  }
-
-  #normalizePlace(place) {
-    return String(place ?? "").trim();
   }
 }
